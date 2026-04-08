@@ -28,6 +28,8 @@ class Homepage extends Component
 
     public array $workArea = [];
 
+    public array $faq = [];
+
     public function mount(): void
     {
         $this->companyName = Setting::get('company_name', 'Installatiebedrijf');
@@ -52,6 +54,13 @@ class Homepage extends Component
         $this->workArea = KnowledgeEntry::query()
             ->active()
             ->byCategory(KnowledgeCategory::Werkgebied)
+            ->orderBy('sort_order')
+            ->get()
+            ->toArray();
+
+        $this->faq = KnowledgeEntry::query()
+            ->active()
+            ->byCategory(KnowledgeCategory::Faq)
             ->orderBy('sort_order')
             ->get()
             ->toArray();
