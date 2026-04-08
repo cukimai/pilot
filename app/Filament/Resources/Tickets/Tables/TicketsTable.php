@@ -11,6 +11,7 @@ use App\Models\User;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
@@ -60,6 +61,7 @@ class TicketsTable
             ])
             ->recordActions([
                 ViewAction::make(),
+                EditAction::make(),
                 Action::make('assign')
                     ->label('Toewijzen')
                     ->icon('heroicon-o-user-plus')

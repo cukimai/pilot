@@ -17,7 +17,7 @@ class StatsOverview extends StatsOverviewWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Open Tickets', Ticket::query()->where('status', 'open')->count())
+            Stat::make('Open tickets', Ticket::query()->where('status', 'open')->count())
                 ->icon('heroicon-o-ticket')
                 ->color('warning'),
             Stat::make('Afspraken Vandaag', Appointment::query()->whereDate('scheduled_at', today())->count())

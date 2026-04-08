@@ -14,7 +14,7 @@ class TicketInfolist
     {
         return $schema
             ->components([
-                Section::make('Ticket Details')
+                Section::make('Ticketgegevens')
                     ->columns(4)
                     ->schema([
                         TextEntry::make('subject')

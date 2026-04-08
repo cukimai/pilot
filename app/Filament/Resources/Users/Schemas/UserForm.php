@@ -40,7 +40,7 @@ class UserForm
                     ->default('monteur')
                     ->required(),
                 TextInput::make('google_calendar_id')
-                    ->label('Google Calendar ID')
+                    ->label('Google Agenda ID')
                     ->maxLength(255),
             ]);
     }
