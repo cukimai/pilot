@@ -39,11 +39,11 @@ class TicketInfolist
                             ->label('Contact'),
                         TextEntry::make('assignedTo.name')
                             ->label('Toegewezen aan')
-                            ->default('Niet toegewezen'),
+                            ->placeholder('Niet toegewezen'),
                         TextEntry::make('scheduled_at')
                             ->label('Ingepland')
                             ->dateTime('d-m-Y H:i')
-                            ->default('Niet ingepland'),
+                            ->placeholder('Niet ingepland'),
                         TextEntry::make('created_at')
                             ->label('Aangemaakt')
                             ->dateTime('d-m-Y H:i'),
