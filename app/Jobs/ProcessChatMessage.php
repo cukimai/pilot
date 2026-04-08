@@ -12,6 +12,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class ProcessChatMessage implements ShouldQueue
 {
@@ -33,6 +34,10 @@ class ProcessChatMessage implements ShouldQueue
     {
         $message = $chatAiService->processMessage($this->conversation);
 
-        ChatMessageReceived::dispatch($message);
+        try {
+            ChatMessageReceived::dispatch($message);
+        } catch (\Throwable $e) {
+            Log::warning('Broadcasting failed (Reverb not running?)', ['error' => $e->getMessage()]);
+        }
     }
 }
