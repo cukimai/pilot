@@ -6,9 +6,9 @@ namespace App\Filament\Pages;
 
 use App\Models\Setting;
 use BackedEnum;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Schema;
