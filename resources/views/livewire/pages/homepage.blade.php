@@ -37,18 +37,14 @@
     </nav>
 
     {{-- Hero --}}
-    <section class="relative min-h-screen overflow-hidden pt-18">
-        {{-- Background image --}}
-        <div class="absolute inset-0 z-0">
-            <img
-                src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1920&q=80&auto=format&fit=crop"
-                alt=""
-                class="h-full w-full object-cover"
-            />
-            <div class="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/40"></div>
-        </div>
+    <section class="relative overflow-hidden pb-16 pt-32 lg:pb-24 lg:pt-40">
+        {{-- Background gradient --}}
+        <div class="absolute inset-0 z-0 bg-gradient-to-br from-slate-50 via-white to-blue-50"></div>
+        <div class="absolute right-0 top-0 z-0 h-full w-1/2 bg-gradient-to-l from-blue-100/40 to-transparent"></div>
+        <div class="absolute -right-40 -top-40 z-0 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-amber-100/30 to-orange-100/20 blur-3xl"></div>
+        <div class="absolute -bottom-20 -left-20 z-0 h-[400px] w-[400px] rounded-full bg-gradient-to-tr from-blue-100/20 to-cyan-100/10 blur-3xl"></div>
 
-        <div class="relative z-10 mx-auto flex min-h-[calc(100vh-4.5rem)] max-w-7xl items-center px-6 lg:px-8">
+        <div class="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
             <div class="max-w-2xl py-20">
                 <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/80 px-4 py-1.5 text-sm text-gray-600 backdrop-blur-sm">
                     <span class="relative flex h-2 w-2">
@@ -129,11 +125,11 @@
                 </div>
 
                 @php
-                    $serviceImages = [
-                        'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&q=80&auto=format&fit=crop',
-                        'https://images.unsplash.com/photo-1631545806609-35d4ae440e22?w=800&q=80&auto=format&fit=crop',
-                        'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80&auto=format&fit=crop',
-                        'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80&auto=format&fit=crop',
+                    $serviceGradients = [
+                        'from-orange-500 to-red-600',
+                        'from-cyan-500 to-blue-600',
+                        'from-yellow-400 to-orange-500',
+                        'from-emerald-500 to-teal-600',
                     ];
                     $serviceIcons = [
                         '<path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" />',
@@ -145,21 +141,13 @@
 
                 <div class="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
                     @foreach($services as $index => $service)
-                        <div class="group overflow-hidden rounded-2xl bg-gray-50 transition-all hover:-translate-y-1 hover:shadow-xl">
-                            <div class="aspect-[4/3] overflow-hidden">
-                                <img
-                                    src="{{ $serviceImages[$index % count($serviceImages)] }}"
-                                    alt="{{ $service['question'] }}"
-                                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                    loading="lazy"
-                                />
+                        <div class="group overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all hover:-translate-y-1 hover:shadow-xl">
+                            <div class="flex aspect-[5/3] items-center justify-center bg-gradient-to-br {{ $serviceGradients[$index % count($serviceGradients)] }}">
+                                <svg class="h-16 w-16 text-white/90" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+                                    {!! $serviceIcons[$index % count($serviceIcons)] !!}
+                                </svg>
                             </div>
                             <div class="p-6">
-                                <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-white shadow-sm">
-                                    <svg class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                        {!! $serviceIcons[$index % count($serviceIcons)] !!}
-                                    </svg>
-                                </div>
                                 <h3 class="text-lg font-semibold text-gray-900">{{ $service['question'] }}</h3>
                                 <p class="mt-2 text-sm leading-relaxed text-gray-500">{!! strip_tags($service['answer']) !!}</p>
                             </div>
@@ -211,13 +199,10 @@
                 </div>
 
                 <div class="relative">
-                    <div class="aspect-[4/5] overflow-hidden rounded-2xl">
-                        <img
-                            src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80&auto=format&fit=crop"
-                            alt="Onze monteurs aan het werk"
-                            class="h-full w-full object-cover"
-                            loading="lazy"
-                        />
+                    <div class="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-slate-700 to-slate-900">
+                        <svg class="h-32 w-32 text-white/10" fill="none" viewBox="0 0 24 24" stroke-width="0.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085" />
+                        </svg>
                     </div>
                     <div class="absolute -bottom-6 -left-6 rounded-2xl bg-white p-6 shadow-xl">
                         <div class="flex items-center gap-4">
@@ -323,14 +308,9 @@
 
     {{-- CTA Banner --}}
     <section class="relative overflow-hidden bg-gray-900 py-24">
-        <div class="absolute inset-0 z-0">
-            <img
-                src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1920&q=80&auto=format&fit=crop"
-                alt=""
-                class="h-full w-full object-cover opacity-20"
-                loading="lazy"
-            />
-        </div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900"></div>
+        <div class="absolute -left-40 -top-40 z-0 h-[500px] w-[500px] rounded-full bg-amber-500/5 blur-3xl"></div>
+        <div class="absolute -bottom-40 -right-40 z-0 h-[500px] w-[500px] rounded-full bg-blue-500/5 blur-3xl"></div>
         <div class="relative z-10 mx-auto max-w-7xl px-6 text-center lg:px-8">
             <h2 class="text-4xl font-bold tracking-tight text-white lg:text-5xl">Storing of onderhoud nodig?</h2>
             <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-300">
