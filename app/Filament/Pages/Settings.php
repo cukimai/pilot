@@ -6,18 +6,16 @@ namespace App\Filament\Pages;
 
 use App\Models\Setting;
 use BackedEnum;
-use Filament\Forms;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 
-class Settings extends Page implements HasForms
+class Settings extends Page
 {
-    use InteractsWithForms;
-
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCog6Tooth;
 
     protected static ?string $navigationLabel = 'Instellingen';
@@ -44,39 +42,39 @@ class Settings extends Page implements HasForms
         ]);
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\Section::make('Bedrijfsgegevens')->schema([
-                    Forms\Components\TextInput::make('company_name')
+        return $schema
+            ->components([
+                Section::make('Bedrijfsgegevens')->schema([
+                    TextInput::make('company_name')
                         ->label('Bedrijfsnaam')
                         ->required(),
-                    Forms\Components\TextInput::make('company_address')
+                    TextInput::make('company_address')
                         ->label('Adres'),
-                    Forms\Components\TextInput::make('company_phone')
+                    TextInput::make('company_phone')
                         ->label('Telefoonnummer')
                         ->tel(),
-                    Forms\Components\TextInput::make('company_email')
+                    TextInput::make('company_email')
                         ->label('E-mail')
                         ->email(),
                 ])->columns(2),
-                Forms\Components\Section::make('AI Instellingen')->schema([
-                    Forms\Components\TextInput::make('ai_greeting')
+                Section::make('AI Instellingen')->schema([
+                    TextInput::make('ai_greeting')
                         ->label('Begroetingstekst')
                         ->helperText('De eerste tekst die de chatbot toont'),
-                    Forms\Components\Textarea::make('ai_tone')
+                    Textarea::make('ai_tone')
                         ->label('Tone of voice')
                         ->helperText('Beschrijf hoe de AI moet communiceren'),
                 ]),
-                Forms\Components\Section::make('Voice Instellingen')->schema([
-                    Forms\Components\TextInput::make('voice_transfer_number')
+                Section::make('Voice Instellingen')->schema([
+                    TextInput::make('voice_transfer_number')
                         ->label('Doorverbind-nummer bij urgentie')
                         ->tel()
                         ->helperText('Telefoonnummer waar urgente bellers naartoe worden doorverbonden'),
                 ]),
-                Forms\Components\Section::make('Notificaties')->schema([
-                    Forms\Components\Textarea::make('notification_emails')
+                Section::make('Notificaties')->schema([
+                    Textarea::make('notification_emails')
                         ->label('E-mailadressen voor notificaties')
                         ->helperText('Eén e-mailadres per regel'),
                 ]),
