@@ -10,6 +10,7 @@
     @livewireStyles
     <style>
         body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        #vapi-support-btn { position: fixed !important; bottom: 24px !important; left: 24px !important; z-index: 9999 !important; }
     </style>
 </head>
 <body class="min-h-screen bg-white text-gray-900 antialiased">
