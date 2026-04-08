@@ -32,7 +32,7 @@
                 id="chat-messages"
                 class="flex-1 space-y-3 overflow-y-auto px-5 py-4"
                 x-init="scrollToBottom()"
-                wire:poll.2s
+                @if($isTyping) wire:poll.1s="pollForMessages" @endif
             >
                 @foreach($messages as $message)
                     <div class="flex {{ $message['role'] === 'user' ? 'justify-end' : 'justify-start' }}">

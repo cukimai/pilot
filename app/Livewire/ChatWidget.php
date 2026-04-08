@@ -74,25 +74,37 @@ class ChatWidget extends Component
         );
     }
 
-    public function onMessageReceived(array $data): void
+    public function pollForMessages(): void
     {
+        if (! $this->conversationId || ! $this->isTyping) {
+            return;
+        }
+
+        $lastAssistantMessage = Message::query()
+            ->where('conversation_id', $this->conversationId)
+            ->where('role', MessageRole::Assistant)
+            ->latest('created_at')
+            ->first();
+
+        if (! $lastAssistantMessage) {
+            return;
+        }
+
+        $alreadyHasIt = collect($this->messages)
+            ->where('role', 'assistant')
+            ->where('content', $lastAssistantMessage->content)
+            ->isNotEmpty();
+
+        if ($alreadyHasIt) {
+            return;
+        }
+
         $this->messages[] = [
-            'role' => $data['role'],
-            'content' => $data['content'],
+            'role' => 'assistant',
+            'content' => $lastAssistantMessage->content,
         ];
 
         $this->isTyping = false;
-    }
-
-    public function getListeners(): array
-    {
-        if (! $this->conversationId) {
-            return [];
-        }
-
-        return [
-            "echo:conversation.{$this->conversationId},ChatMessageReceived" => 'onMessageReceived',
-        ];
     }
 
     public function render()
