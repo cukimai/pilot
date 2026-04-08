@@ -11,7 +11,6 @@ use App\Jobs\ProcessChatMessage;
 use App\Models\Conversation;
 use App\Models\Message;
 use App\Models\Setting;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
 class ChatWidget extends Component
@@ -75,7 +74,6 @@ class ChatWidget extends Component
         );
     }
 
-    #[On('echo:conversation.{conversationId},ChatMessageReceived')]
     public function onMessageReceived(array $data): void
     {
         $this->messages[] = [
